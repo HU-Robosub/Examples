@@ -1,0 +1,17 @@
+/ {
+    soc {
+        i2c1: i2c@40005400 {
+            mpu9250: mpu9250@68 {
+                compatible = "invensense,mpu9250";
+                reg = <0x68>;
+                status = "okay";
+                irq-gpios = <&gpioh 7 GPIO_ACTIVE_HIGH>;
+                gyro-sr-div = <(250)>;
+                gyro-dlpf = <(250)>;
+                gyro-fs = <(250)>;
+                accel-fs = <(4)>;
+                accel-dlpf = "99";
+            };
+        };
+    };
+};

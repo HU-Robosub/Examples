@@ -1,3 +1,5 @@
 **/logs
 **/.pio
 **/.vscode
+**/bin
+**/obj

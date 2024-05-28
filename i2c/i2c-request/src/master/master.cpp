@@ -1,20 +1,13 @@
 #include <Arduino.h>
 #include <Wire.h>
 
-#define SLAVE_ADDRESS 0x04
-
-void setup() {
-  Wire.begin();
-  Serial.begin(9600);
-  while (!Serial) {
-    delay(3000);
-  }
-}
-
-void loop() {
-  int length = 3;
+void sendRequest(int slave, int length, int reg) {
+  Serial.println("Sending a register byte!");
+  Wire.beginTransmission(slave);
+  Wire.write(reg);
+  Wire.endTransmission();
   Serial.println("Initiated a request!");
-  Wire.requestFrom(SLAVE_ADDRESS, length);
+  Wire.requestFrom(slave, length);
   byte answer[length];  // Declare an array to hold the received bytes
 
   int i = 0;
@@ -28,5 +21,18 @@ void loop() {
     Serial.print(", ");   // Add a space between values for readability
   }
   Serial.println();
-  delay(1000);
+}
+
+void setup() {
+  Wire.begin();
+  Serial.begin(9600);
+  while (!Serial) {
+    delay(3000);
+  }
+}
+
+void loop() {
+  sendRequest(0x05, 1, 0x02);
+  delay(2000);
+  Serial.println("Request processed!");
 }

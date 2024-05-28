@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include <Wire.h>
 
-#define SLAVE_ADDRESS 0x04
+#define SLAVE_ADDRESS 0x08
 
 byte TxByte = 0;
 
@@ -12,7 +12,7 @@ void I2C_TxHandler(void)
 }
 
 void setup() {
-  Wire.setPins(SDA, SCL);
+  Wire.setPins(33, 32);
   Wire.begin(SLAVE_ADDRESS);
   Serial.begin(9600);
   Wire.onRequest(I2C_TxHandler);
